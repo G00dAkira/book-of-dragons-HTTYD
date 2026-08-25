@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book of Dragons</title>
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Book of Dragons" />
+    <meta name="theme-color" content="#4A2002" />
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap');
+
+        body {
+            font-family: 'IM Fell English', serif;
+            background: url('parchment-texture.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Banner container */
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-top: 12.5%;
+            /* Maintain aspect ratio (height: width = 1:8) */
+            background: url('banner.png') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            z-index: 0;
+        }
+
+        /* Title text inside the banner */
+        .banner-text {
+            font-size: 4vw;
+            /* Smaller responsive size */
+            font-weight: bold;
+            color: #4A2002;
+            text-align: center;
+            border-radius: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.6);
+            /* Semi-transparent white */
+            width: 90%;
+            max-width: 650px;
+            /* Prevent it from being too wide */
+            box-sizing: border-box;
+            line-height: 1.1;
+            z-index: 1;
+        }
+
+        /* Ensures the title stays vertically centered in the banner */
+        .banner-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h2 {
+            text-align: center;
+            color: #4A2002;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 32px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: 120px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Centered search and filter container */
+        .search-filter-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+            max-width: 1000px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-bar,
+        .filter-dropdown {
+            font-size: 16px;
+            padding: 10px;
+            border: 2px solid #4A2002;
+            border-radius: 8px;
+            background-color: rgba(255, 245, 230, 0.9);
+            color: #4A2002;
+            box-sizing: border-box;
+        }
+
+        .search-bar {
+            width: 50%;
+            max-width: 400px;
+        }
+
+        .filter-dropdown {
+            width: 180px;
+            cursor: pointer;
+        }
+
+        .filter-dropdown:focus {
+            outline: none;
+            border-color: #7B3E19;
+        }
+
+        .dragon-card {
+            background: rgba(255, 245, 230, 0.9);
+            border: 2px solid #4A2002;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .dragon-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 2px solid #4A2002;
+        }
+
+        .dragon-card h3 {
+            color: #7B3E19;
+            margin: 10px 0;
+        }
+
+        .dragon-card p {
+            color: #4A2002;
+        }
+
+        .button {
+            background: #7B3E19;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background: #5A2D12;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .search-bar {
+            font-size: 16px;
+            padding: 10px;
+            border: 2px solid #4A2002;
+            border-radius: 8px;
+            width: 50%;
+            max-width: 400px;
+            background-color: rgba(255, 245, 230, 0.9);
+            color: #4A2002;
+            box-sizing: border-box;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: #7B3E19;
+        }
+
+
+        
+    </style>
+</head>
+<header>
+    <div id="google_translate_element"></div>
+</header>
+
+<body>
+    <div class="banner">
+        <div class="banner-text">Book Of Dragons</div> <!-- Centered Text on the Banner -->
+    </div>
+
+    <!-- Centered search and filter container -->
+    <div class="search-filter-container">
+        <input type="text" id="searchBar" class="search-bar" placeholder="Search for a Dragon by name..."
+            onkeyup="filterDragons()">
+
+        <select id="classFilter" class="filter-dropdown" onchange="filterDragons()">
+            <option value="all">Filter by Class</option>
+            <option value="Stoker">Stoker</option>
+            <option value="Boulder">Boulder</option>
+            <option value="Tracker">Tracker</option>
+            <option value="Sharp">Sharp</option>
+            <option value="Tidal">Tidal</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Strike">Strike</option>
+            <option value="Unknown">Unknown</option>
+        </select>
+    </div>
+
+    <!-- Dragon List -->
+    <div class="container" id="dragonList">
+        <!-- Dragon cards will be dynamically inserted here -->
+    </div>
+
+    <script src="scripts.js"></script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',       // Your site's original language
+                includedLanguages: 'en,es,fr,de,zh,ja,ko,pt,be,hi,zh-CN,ta,vi,uk,tr,sv,sl,sk,sr,ro,ru,pt-PT,pl,no,lt,lv,it,id,is,hu,el,fi,fil,nl,da,ar', // Languages you want to support, or leave out to support all
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+</body>
+
+</html>
